@@ -20,6 +20,7 @@ const Notes = db.define(
   },
   {
     freezeTableName: true,
+    timestamps: true,
     createdAt: "Tanggal_dibuat",
     updatedAt: "Tanggal_diperbarui",
   }
@@ -30,4 +31,3 @@ const Notes = db.define(
 })();
 
 export default Notes;
-

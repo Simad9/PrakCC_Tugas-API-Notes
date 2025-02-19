@@ -1,14 +1,19 @@
-import Notes from "../model/NotesModeljs.";
+import Notes from "../model/NotesModel.js";
 
 export const createNotes = async (req, res) => {
   const { title, content } = req.body;
+
+  console.log("data param", req.body);
 
   try {
     const notes = await Notes.create({
       title,
       content,
     });
-    res.status(201).json(notes);
+    res.status(201).json({
+      message: "Notes created successfully",
+      data: notes,
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -17,11 +22,10 @@ export const createNotes = async (req, res) => {
 export const getNotes = async (req, res) => {
   const { id } = req.params;
   try {
-    const notes = await Notes.findAll({
-      where: {
-        id,
-      },
-    });
+    const notes = id
+      ? await Notes.findAll({ where: { id } })
+      : await Notes.findAll();
+
     res.status(200).json(notes);
   } catch (error) {
     res.status(500).json({ message: error.message });

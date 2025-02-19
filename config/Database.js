@@ -1,8 +1,8 @@
-import {Sequalize} from 'sequelize';
+import { Sequelize } from "sequelize";
 
-const db = new Sequalize('tugas_notes', 'username', 'password', {
-  host: 'localhost',
-  dialect: 'mysql'
+const db = new Sequelize("tugas_notes", "root", "", {
+  host: "localhost",
+  dialect: "mysql",
 });
 
 export default db;
