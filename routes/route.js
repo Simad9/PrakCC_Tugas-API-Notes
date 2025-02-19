@@ -15,4 +15,8 @@ router.post("/notes", createNotes);
 router.put("/notes/:id", updateNotes);
 router.delete("/notes/:id", deleteNotes);
 
+router.get("*", (req, res) => {
+  res.status(404).json({ message: "Route not found" });
+});
+
 export default router;

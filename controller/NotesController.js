@@ -11,7 +11,7 @@ export const createNotes = async (req, res) => {
       content,
     });
     res.status(201).json({
-      message: "Notes created successfully",
+      message: "Notes berhasil dibuat",
       data: notes,
     });
   } catch (error) {
@@ -26,7 +26,10 @@ export const getNotes = async (req, res) => {
       ? await Notes.findAll({ where: { id } })
       : await Notes.findAll();
 
-    res.status(200).json(notes);
+    res.status(200).json({
+      message: "Notes berhasil dambil",
+      data: notes,
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -47,7 +50,10 @@ export const updateNotes = async (req, res) => {
         },
       }
     );
-    res.status(200).json(notes);
+    res.status(200).json({
+      message: "Notes berhasil diupdate",
+      data: notes,
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -61,7 +67,10 @@ export const deleteNotes = async (req, res) => {
         id,
       },
     });
-    res.status(200).json(notes);
+    res.status(200).json({
+      message: "Notes berhasil dihapus",
+      data: notes,
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
