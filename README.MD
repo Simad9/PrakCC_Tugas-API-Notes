@@ -9,7 +9,7 @@ Ini adalah Tugas Prak CC. Disuruh buat API Notes yang mengimplementasikan CRUD
 1. Clone Repository
 
 ```bash
-git clone https://github.com/putraafrizal/notes_be.git
+git clone https://github.com/Simad9/PrakCC_Tugas-API-Notes
 ```
 
 2. Install Dependencies
