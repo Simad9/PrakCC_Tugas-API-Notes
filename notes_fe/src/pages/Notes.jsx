@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { BASE_URL } from "../utils";
 
 function NotesApp() {
   const [notes, setNotes] = useState([]);
@@ -9,7 +10,7 @@ function NotesApp() {
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/notes");
+        const response = await axios.get(`${BASE_URL}/notes`);
         setNotes(response.data.data);
       } catch (error) {
         console.error("Error fetching notes:", error);
@@ -22,7 +23,7 @@ function NotesApp() {
     if (!title.trim() || !content.trim()) return;
 
     try {
-      const response = await axios.post("http://localhost:5000/add-note", { title, content });
+      const response = await axios.post(`${BASE_URL}/add-note`, { title, content });
       if (response.data.data) {
         setNotes((prevNotes) => [...prevNotes, response.data.data]);
         setTitle("");
@@ -35,7 +36,7 @@ function NotesApp() {
 
   const deleteNote = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/delete-note/${id}`);
+      await axios.delete(`${BASE_URL}/delete-note/${id}`);
       setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
     } catch (error) {
       console.error("Error deleting note:", error);
@@ -62,7 +63,7 @@ function NotesApp() {
     if (!newTitle.trim() || !newContent.trim()) return;
 
     try {
-      const response = await axios.put(`http://localhost:5000/update-note/${id}`, { title: newTitle, content: newContent });
+      const response = await axios.put(`${BASE_URL}/update-note/${id}`, { title: newTitle, content: newContent });
       if (response.data.data) {
         setNotes((prevNotes) =>
           prevNotes.map((note) =>

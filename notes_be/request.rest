@@ -8,18 +8,18 @@ POST http://localhost:5000/add-note
 Content-Type: application/json
 
 {
-    "title": "Test 2",
-    "content": "Ini Konten test 2"
+    "title": "Test migrasi",
+    "content": "Migrasi db berhasil"
 }
 
 ###
-PUT http://localhost:5000/update-note/4
+PUT http://localhost:5000/update-note/11
 Content-Type: application/json
 
 {
-    "title": "Test 1 - edit",
-    "content": "Ini Konten test 1 - edit"
+    "title": "Test 2 - edit",
+    "content": "Ini Konten test 2 - edit"
 }
 
 ###
-DELETE http://localhost:5000/delete-note/1
+DELETE http://localhost:5000/delete-note/11

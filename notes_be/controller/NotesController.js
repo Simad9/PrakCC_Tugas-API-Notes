@@ -27,7 +27,7 @@ export const getNotes = async (req, res) => {
       : await Notes.findAll();
 
     res.status(200).json({
-      message: "Notes berhasil dambil",
+      message: "Notes berhasil diambil",
       id: id,
       data: notes,
     });
