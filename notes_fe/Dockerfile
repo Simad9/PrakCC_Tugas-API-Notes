@@ -4,4 +4,4 @@ COPY public/ /notes_fe/public
 COPY src/ /notes_fe/src
 COPY package.json /notes_fe/
 RUN npm install
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]
