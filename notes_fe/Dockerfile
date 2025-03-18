@@ -1,7 +1,13 @@
 FROM node:18-alpine
-WORKDIR /notes_fe/
-COPY public/ /notes_fe/public
-COPY src/ /notes_fe/src
-COPY package.json /notes_fe/
+
+WORKDIR /app
+
+COPY package*.json ./
+
 RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
 CMD ["npm", "run", "dev"]

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { BASE_URL } from "../utils";
+import { BASE_URL } from "../utils/utils.js";
 
 function NotesApp() {
   const [notes, setNotes] = useState([]);
