@@ -22,7 +22,7 @@ steps:
     args:
       - -c
       - |
-        VITE_API_URL="https://notes-backend-wijdan-13926268988.us-central1.run.app" npm run build
+        npm run build
     dir: "notes_fe"
     volumes:
       - name: "npm-cache"
