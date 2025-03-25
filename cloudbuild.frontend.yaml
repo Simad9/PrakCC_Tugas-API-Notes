@@ -1,12 +1,11 @@
 options:
   logging: CLOUD_LOGGING_ONLY
-  cache:
-    paths:
-      - "notes_fe/node_modules"
-      - "notes_fe/.npm"
+cache:
+  paths:
+    - "notes_fe/node_modules"
+    - "notes_fe/.npm"
 
 steps:
-  # Step 1: Install dependencies (hanya jika node_modules belum ada)
   - name: "gcr.io/cloud-builders/npm"
     entrypoint: bash
     args:
@@ -20,12 +19,10 @@ steps:
         fi
     dir: "notes_fe"
 
-  # Step 2: Build Vite frontend
   - name: "gcr.io/cloud-builders/npm"
     args: ["run", "build"]
     dir: "notes_fe"
 
-  # Step 3: Deploy to App Engine
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     entrypoint: gcloud
     args: ["app", "deploy", "--quiet"]
