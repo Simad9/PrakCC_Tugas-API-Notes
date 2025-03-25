@@ -1,4 +1,5 @@
 steps:
+  # Step 1: Install dependencies (dengan cache lokal via volume)
   - name: "gcr.io/cloud-builders/npm"
     entrypoint: bash
     args:
@@ -11,20 +12,27 @@ steps:
           echo "Skipping npm install, node_modules exists."
         fi
     dir: "notes_fe"
+    volumes:
+      - name: "npm-cache"
+        path: /root/.npm
 
+  # Step 2: Build frontend
   - name: "gcr.io/cloud-builders/npm"
     args: ["run", "build"]
     dir: "notes_fe"
+    volumes:
+      - name: "npm-cache"
+        path: /root/.npm
 
+  # Step 3: Deploy to App Engine
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     entrypoint: gcloud
     args: ["app", "deploy", "--quiet"]
     dir: "notes_fe"
 
+volumes:
+  - name: "npm-cache"
+    path: /root/.npm
+
 options:
   logging: CLOUD_LOGGING_ONLY
-
-cache:
-  paths:
-    - "notes_fe/node_modules"
-    - "notes_fe/.npm"
