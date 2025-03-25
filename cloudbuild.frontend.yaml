@@ -1,19 +1,24 @@
+options:
+  logging: CLOUD_LOGGING_ONLY
+  cache:
+    paths:
+      - node_modules/
+      - .npm/
+
 steps:
-# 1. Install dependencies
 - name: 'gcr.io/cloud-builders/npm'
-  args: ['install']
+  args: ['ci']
   dir: 'notes_fe'
 
-# 2. Build Vite frontend
 - name: 'gcr.io/cloud-builders/npm'
   args: ['run', 'build']
   dir: 'notes_fe'
 
-# 3. Deploy hasil build ke App Engine
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: gcloud
   args: ['app', 'deploy', '--quiet']
   dir: 'notes_fe'
+
 
 # Log hanya akan disimpan di Google Cloud Logging
 # Log tidak akan disimpan di Google Cloud Storage (butuh hak akses).
