@@ -19,3 +19,9 @@ Lalu menggunakan axios untuk melakukan request ke BE.
 
 Komentar saya = basic banget emang UI nya\
 ![image](/preview/tampilan.png)
+
+### Tugas untuk
+
+- Tugas 1
+- Tugas 6
+- Tugas 7
