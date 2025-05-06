@@ -15,6 +15,10 @@ const Users = db.define("User", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  refresh_token: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+  },
 });
 
 export default Users;

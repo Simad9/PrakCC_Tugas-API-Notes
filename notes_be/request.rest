@@ -1,25 +1,23 @@
-GET http://localhost:5000/notes
-
-###
-GET http://localhost:5000/notes/1
-
-###
-POST http://localhost:5000/add-note
+POST http://localhost:5000/register
 Content-Type: application/json
 
 {
-    "title": "Test migrasi",
-    "content": "Migrasi db berhasil"
+    "username": "user",
+    "password": "user123",
+    "confirm_password": "user123"
 }
 
 ###
-PUT http://localhost:5000/update-note/11
+POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "title": "Test 2 - edit",
-    "content": "Ini Konten test 2 - edit"
+    "username": "user",
+    "password": "user123"
 }
 
 ###
-DELETE http://localhost:5000/delete-note/11
+GET http://localhost:5000/token
+
+###
+DELETE http://localhost:5000/logout
