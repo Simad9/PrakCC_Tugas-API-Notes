@@ -2,9 +2,9 @@ POST http://localhost:5000/register
 Content-Type: application/json
 
 {
-    "username": "user",
-    "password": "user123",
-    "confirm_password": "user123"
+    "username": "Wijdan",
+    "password": "Wijdan123",
+    "confirm_password": "Wijdan123"
 }
 
 ###
@@ -12,8 +12,8 @@ POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "username": "user",
-    "password": "user123"
+    "username": "Wijdan",
+    "password": "Wijdan123"
 }
 
 ###
@@ -21,3 +21,18 @@ GET http://localhost:5000/token
 
 ###
 DELETE http://localhost:5000/logout
+
+###---
+GET http://localhost:5000/notes
+Content-Type: application/json
+Authorization: Bereer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJXaWpkYW4iLCJpYXQiOjE3NDY1MzE5MTMsImV4cCI6MTc0NjUzMTk0M30.yuYJP21T_oh6qTwBsQYn5iYCP7ytuFoAVvSbR9vBXeg
+
+###
+POST http://localhost:5000/add-not
+Content-Type: application/json
+Authorization: Bereer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJXaWpkYW4iLCJpYXQiOjE3NDY1MzE5MTMsImV4cCI6MTc0NjUzMTk0M30.yuYJP21T_oh6qTwBsQYn5iYCP7ytuFoAVvSbR9vBXeg
+
+{
+  "title": "Test Ubah",
+  "content": "Ini"
+}
