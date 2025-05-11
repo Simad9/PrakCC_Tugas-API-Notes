@@ -2,13 +2,13 @@ POST https://notes-backend-wijdan-13926268988.us-central1.run.app/register
 Content-Type: application/json
 
 {
-    "username": "Akhamd",
-    "password": "Akhmad123",
-    "confirm_password": "Akhmad123"
+    "username": "123",
+    "password": "123",
+    "confirm_password": "123"
 }
 
 ###
-POST http://localhost:5000/login
+POST https://notes-backend-wijdan-13926268988.us-central1.run.app/login
 Content-Type: application/json
 
 {
