@@ -19,15 +19,10 @@ Content-Type: application/json
 ###
 GET http://localhost:5000/token
 
-###---
-DELETE http://localhost:5000/delete-note/12
-Content-Type: application/json
-Authorization: Bereer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidXNlcm5hbWUiOiIxMjMiLCJpYXQiOjE3NDY2MzgzMzIsImV4cCI6MTc0NjYzODM1Mn0.sd_jM7cb040cxUUAKpSaWTj9f1xr9dpGoQmk3YGdIAo
-
 ###
-PUT http://localhost:5000/update-note/
+PUT http://localhost:5000/update-note/49
 Content-Type: application/json
-Authorization: Bereer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidXNlcm5hbWUiOiIxMjMiLCJpYXQiOjE3NDY2MzgzMzIsImV4cCI6MTc0NjYzODM1Mn0.sd_jM7cb040cxUUAKpSaWTj9f1xr9dpGoQmk3YGdIAo
+Authorization: Bereer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidXNlcm5hbWUiOiIxMjMiLCJpYXQiOjE3NDY5NjY0NDEsImV4cCI6MTc0Njk2NjQ3MX0.XoeTgLo-0MRAN0o8kWEoBrSc3lK4-xe2FmacHDe8YC0
 
 {
   "title": "Test Ubah",

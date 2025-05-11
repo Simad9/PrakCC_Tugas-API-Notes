@@ -37,7 +37,8 @@ export const getNotes = async (req, res) => {
 };
 
 export const updateNotes = async (req, res) => {
-  const id = req.param.id;
+  const { id } = req.params;
+
   const userId = req.user.id;
   const { title, content } = req.body;
   try {

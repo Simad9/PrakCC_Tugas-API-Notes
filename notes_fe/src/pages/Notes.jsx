@@ -69,13 +69,22 @@ function NotesApp() {
     if (!newTitle.trim() || !newContent.trim()) return;
 
     try {
-      const response = await axios.put(`${BASE_URL}/update-note/${id}`, { title: newTitle, content: newContent });
+      const response = await axios.put(`${BASE_URL}/update-note/${id}`, {
+        title: newTitle,
+        content: newContent,
+      });
+
       if (response.data.data) {
-        setNotes((prevNotes) =>
-          prevNotes.map((note) =>
-            note.id === id ? { ...response.data.data, isEditing: false } : note
-          )
-        );
+        await fetchNotes();
+        // setNotes((prevNotes) =>
+        //   prevNotes.map((note) =>
+        //     note.id === id
+        //       ? { ...response.data.data, isEditing: false }
+        //       : note
+        //   )
+        // );
+      } else {
+        alert("Gagal simpan data");
       }
     } catch (error) {
       console.error("Error updating note:", error);
@@ -87,16 +96,29 @@ function NotesApp() {
     navigate("/login"); // redirect ke halaman login setelah logout
   };
 
+  const handleRefresh = async () => {
+    await fetchNotes();
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
       <div className="max-w-2xl w-full mx-auto p-8 bg-white shadow rounded-lg flex flex-col items-center">
-        {/* Logout Button */}
-        <button
-          className=" bg-red-500 text-white p-2 rounded mb-4"
-          onClick={handleLogout}
-        >
-          Logout
-        </button>
+        <div className="flex gap-5">
+          {/* Logout Button */}
+          <button
+            className=" bg-red-500 text-white p-2 rounded mb-4 cursor-pointer"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+          {/* Logout Button */}
+          <button
+            className=" bg-blue-500 text-white p-2 rounded mb-4 cursor-pointer"
+            onClick={handleRefresh}
+          >
+            Refresh
+          </button>
+        </div>
 
         <h1 className="text-2xl font-bold text-center mb-4">Notes App</h1>
         {/* Add Note Form */}
