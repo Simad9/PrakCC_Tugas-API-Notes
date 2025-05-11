@@ -37,7 +37,8 @@ export const getNotes = async (req, res) => {
 };
 
 export const updateNotes = async (req, res) => {
-  const id = req.user.id;
+  const id = req.param.id;
+  const userId = req.user.id;
   const { title, content } = req.body;
   try {
     const notes = await Notes.update(
@@ -53,7 +54,7 @@ export const updateNotes = async (req, res) => {
     );
     res.status(200).json({
       message: "Notes berhasil diupdate",
-      userId: id,
+      userId,
       data: notes,
     });
   } catch (error) {
@@ -62,7 +63,10 @@ export const updateNotes = async (req, res) => {
 };
 
 export const deleteNotes = async (req, res) => {
-  const id = req.user.id;
+  const { id } = req.params;
+  console.log("ID NOTES = ", id);
+
+  const userId = req.user.id;
   try {
     const notes = await Notes.destroy({
       where: {
@@ -71,7 +75,7 @@ export const deleteNotes = async (req, res) => {
     });
     res.status(200).json({
       message: "Notes berhasil dihapus",
-      userId: id,
+      userId,
       data: notes,
     });
   } catch (error) {

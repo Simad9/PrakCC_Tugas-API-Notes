@@ -1,45 +1,29 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from '../utils/axiosConfig'; // Import axiosConfig
-import { BASE_URL } from "../utils/utils.js";
-import PropTypes from 'prop-types';
+import useAuth from "../auth/useAuth";
 
+const LoginPage = () => {
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
-const LoginPage = ({ setIsAuthenticated }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setError("");
 
     // Logic untuk autentikasi login
     console.log("Login with", { username, password });
     try {
-      const response = await axios.post(
-        `${BASE_URL}/login`,
-        { username, password },
-        {
-          headers: {
-            "Content-Type": "application/json", // Pastikan headernya benar
-          },
-        }
-      );
-      if (response.data) {
-        // Simpan accessToken di localStorage
-        localStorage.setItem('accessToken', response.data.accessToken);
-
-        // Simpan refreshToken di cookie (httpOnly, secure, SameSite=Strict)
-        document.cookie = `refreshToken=${response.data.refreshToken}; Path=/; Secure; HttpOnly; SameSite=Strict; Max-Age=86400`;
-
-        // Ubah status autentikasi
-        setIsAuthenticated(true);
-
-        // Arahkan ke halaman notes setelah login berhasil
-        navigate("/notes");
+      const result = await login(username, password); // simpan token ke context & cookie
+      if (result) {
+        navigate("/notes"); // redirect setelah login
       } else {
-        alert("Login failed. No data in response.");
+        alert("Login failed");
       }
+
     } catch (error) {
       // Log error untuk debug
       console.error("Login Error:", error.response ? error.response.data : error.message);
@@ -82,6 +66,7 @@ const LoginPage = ({ setIsAuthenticated }) => {
             Login
           </button>
         </form>
+        {error && <p style={{ color: "red" }}>{error}</p>}
         <p className="mt-4 text-center text-sm">
           Belum punya Akun?{" "}
           <Link to="/register" className="text-blue-500 hover:underline">
@@ -91,11 +76,6 @@ const LoginPage = ({ setIsAuthenticated }) => {
       </div>
     </div>
   );
-};
-
-// Validasi prop 'setIsAuthenticated'
-LoginPage.propTypes = {
-  setIsAuthenticated: PropTypes.func.isRequired, // Menambahkan validasi tipe prop
 };
 
 export default LoginPage;

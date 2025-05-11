@@ -1,26 +1,29 @@
 import { useState, useEffect } from "react";
 import { BASE_URL } from "../utils/utils.js";
 import { useNavigate } from "react-router-dom";
-import axios from '../utils/axiosConfig'; // Import axiosConfig
+import axios from '../api/axiosInstance';
+import useAuth from "../auth/useAuth";
 
 function NotesApp() {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
   const [notes, setNotes] = useState([]);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(true); // Default authenticated status, bisa disesuaikan
 
   useEffect(() => {
-    const fetchNotes = async () => {
-      try {
-        const response = await axios.get(`${BASE_URL}/notes`);
-        console.log(response.data.data);
-        setNotes(response.data.data);
-      } catch (error) {
-        console.error("Error fetching notes:", error);
-      }
-    };
     fetchNotes();
   }, []);
+
+  const fetchNotes = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/notes`);
+      setNotes(response.data.data);
+    } catch (error) {
+      console.error("Error fetching notes:", error);
+    }
+  };
 
   const addNote = async () => {
     if (!title.trim() || !content.trim()) return;
@@ -79,26 +82,22 @@ function NotesApp() {
     }
   };
 
-  const navigate = useNavigate();
-  const handleLogout = () => {
-    localStorage.removeItem("accessToken"); // Hapus accessToken dari localStorage
-    document.cookie = "refreshToken=; Path=/; Max-Age=0"; // Hapus refreshToken dari cookie
-    setIsAuthenticated(false); // Ubah status autentikasi
-    navigate("/login", { replace: true }); // Navigasi ke halaman login
+  const handleLogout = async () => {
+    await logout(); // menghapus token dan data lainnya dari context dan cookie
+    navigate("/login"); // redirect ke halaman login setelah logout
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
       <div className="max-w-2xl w-full mx-auto p-8 bg-white shadow rounded-lg flex flex-col items-center">
         {/* Logout Button */}
-        {isAuthenticated && (
-          <button
-            className=" bg-red-500 text-white p-2 rounded mb-4"
-            onClick={handleLogout}
-          >
-            Logout
-          </button>
-        )}
+        <button
+          className=" bg-red-500 text-white p-2 rounded mb-4"
+          onClick={handleLogout}
+        >
+          Logout
+        </button>
+
         <h1 className="text-2xl font-bold text-center mb-4">Notes App</h1>
         {/* Add Note Form */}
         <div className="bg-white p-4 shadow rounded-lg mb-4 w-full">

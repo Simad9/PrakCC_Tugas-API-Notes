@@ -1,8 +1,11 @@
-import { Navigate } from "react-router-dom"; // Untuk melakukan navigasi
+// src/auth/ProtectedRoute.jsx
+import { Navigate } from "react-router-dom";
+import useAuth from "../auth/useAuth";
 import PropTypes from 'prop-types';
 
+const ProtectedRoute = ({ children }) => {
+  const { isAuthenticated } = useAuth();
 
-const ProtectedRoute = ({ isAuthenticated, children }) => { // Perbaikan disini
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
@@ -10,10 +13,9 @@ const ProtectedRoute = ({ isAuthenticated, children }) => { // Perbaikan disini
   return children;
 };
 
-// Validasi prop 'isAuthenticated' dan 'children'
 ProtectedRoute.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired, // Menambahkan validasi tipe prop untuk isAuthenticated
-  children: PropTypes.node.isRequired, // Menambahkan validasi tipe prop untuk children
+  children: PropTypes.node.isRequired,
 };
 
 export default ProtectedRoute;
+
