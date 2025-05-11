@@ -7,13 +7,17 @@ import cookieParser from "cookie-parser";
 const app = express();
 const port = process.env.PORT || 5000;
 
-// Konfigurasi CORS agar hanya mengizinkan port 3000
+// Konfigurasi CORS agar mengizinkan domain frontend terdeploy
 const corsOptions = {
-  origin: "http://notes-frontend-wijdan-dot-projek-tcc-1.uc.r.appspot.com/",  // Daftar domain
-  credentials: true,
+  origin: "https://notes-frontend-wijdan-dot-projek-tcc-1.uc.r.appspot.com", // Ganti dengan URL frontend yang terdeploy
+  credentials: true, // Memungkinkan penggunaan cookies
 };
 
 app.use(cors(corsOptions)); // Menggunakan opsi CORS
+
+// Menambahkan penanganan preflight request (OPTIONS)
+app.options("*", cors(corsOptions)); // Menanggapi preflight requests
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(route);
