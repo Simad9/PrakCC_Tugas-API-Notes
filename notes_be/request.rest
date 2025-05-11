@@ -1,10 +1,10 @@
-POST http://localhost:5000/register
+POST https://notes-backend-wijdan-13926268988.us-central1.run.app/register
 Content-Type: application/json
 
 {
-    "username": "Wijdan",
-    "password": "Wijdan123",
-    "confirm_password": "Wijdan123"
+    "username": "Akhamd",
+    "password": "Akhmad123",
+    "confirm_password": "Akhmad123"
 }
 
 ###
