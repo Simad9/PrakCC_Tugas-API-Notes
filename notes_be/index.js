@@ -9,7 +9,7 @@ const port = process.env.PORT || 5000;
 
 // Konfigurasi CORS agar hanya mengizinkan port 3000
 const corsOptions = {
-  origin: "http://localhost:3000", // Mengizinkan akses hanya dari port 3000
+  origin: "https://notes-backend-wijdan-13926268988.us-central1.run.app", // Mengizinkan akses hanya dari port 3000
   credentials: true, // Jika kamu menggunakan cookies atau session
 };
 
